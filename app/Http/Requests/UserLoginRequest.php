@@ -26,7 +26,7 @@ class UserLoginRequest extends FormRequest
     public function rules()
     {
         return [
-            'email' => 'required|string|email',
+            'cpf' => 'required|numeric',
             'password' => 'required|string|min:8'
         ];
     }

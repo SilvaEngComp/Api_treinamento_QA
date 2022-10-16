@@ -83,7 +83,7 @@ class AuthController extends Controller
         try {
             $payload = $request->all();
 
-            $user = User::getUserDecripted($payload['email']);
+            $user = User::getUserDecripted($payload['cpf']);
 
             if ($user) {
                 if (!Hash::check($payload['password'], $user->password)) {
