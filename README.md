@@ -41,3 +41,15 @@ você só precisa a prender como clonar nesse momento.
 Ao instar o XAMPP, vc pode abrílo em seu computador, pesquisando por ele no menu iniciar. Ative as opções Apache e MSQL, como mostrado
 na imagem abaixo:
 ![Screenshot](imagesReadme/startXampp.png)
+
+Dessa forma você está ligando o serviço apache e o MSQL, sendo assim possível criar um banco de dados local com o PhpMyAdmin
+
+## Criando um banco de dados
+Como o serviço MSQL ligado, você terá acesso ao botão admin, como mostrado na imagem abaixo. Clique nele e o PhpMyAdmin será aberto no browser (google chrome ou outro que esteja usando)
+![Screenshot](imagesReadme/iniciarMsql.png)
+
+Em seguida clique no botão novo, será aberto uma tela ao lado para inserir o nome do banco de dados. Defina o nome de dados exatamente como: treinamentoQA
+
+Em seguida clique em criar, como mostra a imagem abaixo
+
+![Screenshot](imagesReadme/criarDB.png)
