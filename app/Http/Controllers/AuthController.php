@@ -81,29 +81,59 @@ class AuthController extends Controller
     public function login(UserLoginRequest $request)
     {
         try {
-            $payload = $request->all();
+            $credentials = $request->all();
 
-            $user = User::getUserDecripted($payload['cpf']);
-
-            if ($user) {
-                if (!Hash::check($payload['password'], $user->password)) {
-                    return $this->error('Credenciais incorretas', 403);
-                }
-
-                // $this->logout($user);
-                Auth::login($user);
-
-                return $this->success('Wellcome ' . $user->name, [
-                    'user' => $user->build($user),
-                    'token' => $user->createToken('API Token')->plainTextToken,
-                ]);
+            if (!Auth::attempt($credentials)) {
+                return $this->error('User não cadastrado', 404);
             }
 
-            return $this->error('User não cadastrado', 404);
+            $user = User::factory(Auth::user());
+            // if ($user) {
+            //     if (!Hash::check($payload['password'], $user->password)) {
+            //         return $this->error('Credenciais incorretas', 403);
+            //     }
+
+            // Auth::login($user);
+
+            $this->logout($user);
+
+            return $this->success('Wellcome ' . $user->name, [
+                'user' => $user->build($user),
+                'token' => $user->createToken('API_Token')->plainTextToken,
+            ]);
+            // }
+
+
         } catch (Throwable $e) {
-            return $request;
+            return $this->error($e->getMessage(), 500, $request->all());
         }
     }
+
+    // public function login(UserLoginRequest $request)
+    // {
+    //     try {
+    //         $payload = $request->all();
+
+    //         return $user = User::getUserDecripted($payload['cpf']);
+
+    //         if ($user) {
+    //             if (!Hash::check($payload['password'], $user->password)) {
+    //                 return $this->error('Credenciais incorretas', 403);
+    //             }
+
+    //             Auth::login($user);
+
+    //             return $this->success('Wellcome ' . $user->name, [
+    //                 'user' => $user->build($user),
+    //                 'token' => $user->createToken('API Token')->plainTextToken,
+    //             ]);
+    //         }
+
+    //         return $this->error('User não cadastrado', 404);
+    //     } catch (Throwable $e) {
+    //         return $request;
+    //     }
+    // }
 
 
     public function updatePassword(Request $request, User $user)

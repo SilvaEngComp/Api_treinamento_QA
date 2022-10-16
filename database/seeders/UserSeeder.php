@@ -18,7 +18,7 @@ class UserSeeder extends Seeder
         User::create([
             "name" => "Empresa Teste",
             "email" => "valquiriameloengenharia@gmail.com",
-            "password" => "1234",
+            "password" => bcrypt("12345678"),
             "cpf" => "34500820000",
             "cnpj" => "98932207000107",
         ]);

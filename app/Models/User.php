@@ -12,6 +12,19 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+
+    public static function  factory($user): User
+    {
+        $localUser = new User();
+        if ($user) {
+            $localUser->id = $user["id"];
+            $localUser->name = $user["name"];
+            $localUser->email = $user["email"];
+            $localUser->cpf = $user["cpf"];
+            $localUser->cnpj = $user["cnpj"];
+        }
+        return $localUser;
+    }
     /**
      * The attributes that are mass assignable.
      *
@@ -22,7 +35,8 @@ class User extends Authenticatable
         'email',
         'password',
         "phone",
-        "cpf"
+        "cpf",
+        "cnpj"
     ];
 
     /**
@@ -43,6 +57,17 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public  function build(): array
+    {
+        return [
+            "id" => $this->id,
+            "name" => $this->name,
+            "email" => $this->email,
+            "cpf" => $this->cpf,
+            "cnpj" => $this->cnpj,
+        ];
+    }
 
     public static function isStrongPassword(string $password): array
     {
