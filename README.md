@@ -19,7 +19,7 @@ Para isso acesse o site abaixo, faça o download da versão mais rescente do XAM
 O composer é um gerenciador de pacote que permite, com simples comandos, gerenciar as bibliotecas e pacotes utilizados em uma aplicação.
 Acesso o site abaixo, faça o download e instale o composer
 > url(https://getcomposer.org/download/)
-![Screenshot](storage/app/public/downloadComposer.png)
+![Screenshot](imagesReadme/downloadComposer.png)
 
 ## Instalação do Visual Studio Code - VSCode
 O VsCode é uma das melhores IDEs para devenvolvimento de software e tem crescido cada vez mais, pois é muito leve em comparação às demais IDEs e apresenta muitos recursos.
@@ -40,4 +40,4 @@ você só precisa a prender como clonar nesse momento.
 # Colocando a API para funcionar
 Ao instar o XAMPP, vc pode abrílo em seu computador, pesquisando por ele no menu iniciar. Ative as opções Apache e MSQL, como mostrado
 na imagem abaixo:
-![Screenshot](storage/app/public/startXampp.png)
+![Screenshot](imagesReadme/startXampp.png)
