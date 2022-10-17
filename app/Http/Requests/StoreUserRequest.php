@@ -29,7 +29,8 @@ class StoreUserRequest extends FormRequest
             "name" => "required|string",
             "email" => "required|email",
             "password" => "required|min:6|max:10",
-            "phone" => "numeric",
+            "cpf" => "numeric",
+            "cnpj" => "numeric",
         ];
     }
 
