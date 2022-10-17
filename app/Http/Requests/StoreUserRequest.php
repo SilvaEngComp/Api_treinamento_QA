@@ -26,11 +26,11 @@ class StoreUserRequest extends FormRequest
     public function rules()
     {
         return [
-            "name" => "required|string",
+            "name" => "string",
             "email" => "required|email",
             "password" => "required|min:6|max:10",
-            "cpf" => "numeric",
-            "cnpj" => "numeric",
+            "cpf" => "required|numeric",
+            "cnpj" => "required|numeric",
         ];
     }
 
