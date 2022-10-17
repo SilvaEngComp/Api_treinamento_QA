@@ -30,14 +30,13 @@ class UserController extends Controller
      */
     public function store(StoreUserRequest $request)
     {
-        return $dados = $request->all();
+        $dados = $request->all();
 
-        return  $testPassword = User::isStrongPassword($dados["password"]);
+        $testPassword = User::isStrongPassword($dados["password"]);
 
         if (!$testPassword["status"]) {
             return $this->error($testPassword["message"], 400);
         }
-        return 'oi';
 
         $testCpf = User::isCpfValid($dados["cpf"]);
 
@@ -45,11 +44,11 @@ class UserController extends Controller
             return $this->error($testCpf["message"], 400);
         }
 
-        $testCnpj = User::isCnpjValid($dados["cnpj"]);
+        // $testCnpj = User::isCnpjValid($dados["cnpj"]);
 
-        if (!$testCnpj["status"]) {
-            return $this->error($testCnpj["message"], 400);
-        }
+        // if (!$testCnpj["status"]) {
+        //     return $this->error($testCnpj["message"], 400);
+        // }
 
 
 
@@ -61,7 +60,7 @@ class UserController extends Controller
             "cnpj" => $dados["cnpj"],
         ]);
 
-        return $this->success("Cadastro realizado com sucesso", 200, $user);
+        return $this->success("Cadastro realizado com sucesso", $user);
     }
 
 

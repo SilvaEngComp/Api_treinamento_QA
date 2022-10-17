@@ -80,11 +80,12 @@ class User extends Authenticatable
                 $flag = false;
                 $message = "Senha fraca! quantidade de caracteres inferior a 8";
             }
-            return ["status" => $flag, "message" => $message];
+
             if (!preg_match('/[A-Z]/', $password)) {
                 $flag = false;
                 $message = "Senha fraca! Inclua pelo menos uma letra maíuscula";
             }
+
             if (!preg_match('/[a-z]/', $password)) {
                 $flag = false;
                 $message = "Senha fraca! Inclua pelo menos uma letra minúscula";
@@ -93,7 +94,7 @@ class User extends Authenticatable
                 $flag = false;
                 $message = "Senha fraca! Inclua pelo menos um número";
             }
-            return 'oi';
+
             if (!preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $password)) {
                 $flag = false;
                 $message = "Senha fraca! Inclua pelo menos um caracter especial";
