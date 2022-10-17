@@ -30,7 +30,7 @@ Route::prefix('v2')->group(
             Route::prefix('netEmpresa')->group(function () {
                 // Route::get("/", [UserController::class, "index"]);
                 // Route::get("/{user}", [UserController::class, "show"]);
-                Route::post("/", [UserController::class, "store"]);
+                Route::post("/cadastro", [UserController::class, "store"]);
                 // Route::patch("/{user}", [UserController::class, "update"]);
                 // Route::delete("/{user}", [UserController::class, "destroy"]);
             });
