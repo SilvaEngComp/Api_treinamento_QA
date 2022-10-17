@@ -95,7 +95,7 @@ class AuthController extends Controller
 
             // Auth::login($user);
 
-            $this->logout($user);
+            // $this->logout($user);
 
             return $this->success('Wellcome ' . $user->name, [
                 'user' => $user->build($user),

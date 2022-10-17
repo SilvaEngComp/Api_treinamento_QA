@@ -30,25 +30,28 @@ class UserController extends Controller
      */
     public function store(StoreUserRequest $request)
     {
-        $dados = $request->all();
+        return $dados = $request->all();
 
-        $testPassword = User::isStrongPassword($dados["password"]);
+        return  $testPassword = User::isStrongPassword($dados["password"]);
 
         if (!$testPassword["status"]) {
             return $this->error($testPassword["message"], 400);
         }
+        return 'oi';
 
-        $testCpf = User::isCpfValid($dados["password"]);
+        $testCpf = User::isCpfValid($dados["cpf"]);
 
         if (!$testCpf["status"]) {
             return $this->error($testCpf["message"], 400);
         }
 
-        $testCnpj = User::isCnpjValid($dados["password"]);
+        $testCnpj = User::isCnpjValid($dados["cnpj"]);
 
         if (!$testCnpj["status"]) {
             return $this->error($testCnpj["message"], 400);
         }
+
+
 
         $user =  User::create([
             "name" => $dados["name"],

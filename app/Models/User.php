@@ -3,6 +3,8 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use Exception;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -71,30 +73,35 @@ class User extends Authenticatable
 
     public static function isStrongPassword(string $password): array
     {
-        $flag = true;
-        $message = "";
-        if (strlen($password) < 8) {
-            $flag = false;
-            $message = "Senha fraca! quantidade de caracteres inferior a 8";
+        try {
+            $flag = true;
+            $message = "";
+            if (strlen($password) < 8) {
+                $flag = false;
+                $message = "Senha fraca! quantidade de caracteres inferior a 8";
+            }
+            return ["status" => $flag, "message" => $message];
+            if (!preg_match('/[A-Z]/', $password)) {
+                $flag = false;
+                $message = "Senha fraca! Inclua pelo menos uma letra maíuscula";
+            }
+            if (!preg_match('/[a-z]/', $password)) {
+                $flag = false;
+                $message = "Senha fraca! Inclua pelo menos uma letra minúscula";
+            }
+            if (!preg_match('/[0-9]/', $password)) {
+                $flag = false;
+                $message = "Senha fraca! Inclua pelo menos um número";
+            }
+            return 'oi';
+            if (!preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $password)) {
+                $flag = false;
+                $message = "Senha fraca! Inclua pelo menos um caracter especial";
+            }
+            return ["status" => $flag, "message" => $message];
+        } catch (Exception $e) {
+            return $e->getMessage();
         }
-
-        if (!preg_match('/[A-Z]/', $password)) {
-            $flag = false;
-            $message = "Senha fraca! Inclua pelo menos uma letra maíuscula";
-        }
-        if (!preg_match('/[a-z]/', $password)) {
-            $flag = false;
-            $message = "Senha fraca! Inclua pelo menos uma letra minúscula";
-        }
-        if (!preg_match('/[0-9]/', $password)) {
-            $flag = false;
-            $message = "Senha fraca! Inclua pelo menos um número";
-        }
-        if (!preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $password)) {
-            $flag = false;
-            $message = "Senha fraca! Inclua pelo menos um caracter especial";
-        }
-        return ["status" => $flag, "message" => $message];
     }
 
 
