@@ -45,19 +45,26 @@ class UserController extends Controller
             return $this->error($testCpf["message"], 400);
         }
         try {
-            if (!User::with('email', $dados["email"])->exists()) {
-
-                $user =  User::create([
-                    "name" => $dados["name"],
-                    "email" => $dados["email"],
-                    "password" => $dados["password"],
-                    "cpf" => $dados["cpf"],
-                    "cnpj" => $dados["cnpj"],
-                ]);
-
-                return $this->success("Cadastro realizado com sucesso", $user);
+            if (User::with('email', $dados["email"])->exists()) {
+                return  $this->error("O Email enviado já está cadastrado", 400, $dados["email"]);
             }
-            return  $this->error("O Email enviado já está cadastrado", 400, $dados["email"]);
+
+            if (User::with('cpf', $dados["cpf"])->exists()) {
+                return  $this->error("O CPF enviado já está cadastrado", 400, $dados["cpf"]);
+            }
+
+            if (User::with('cnpj', $dados["cnpj"])->exists()) {
+                return  $this->error("O CNPJ enviado já está cadastrado", 400, $dados["cnpj"]);
+            }
+            $user =  User::create([
+                "name" => $dados["name"],
+                "email" => $dados["email"],
+                "password" => $dados["password"],
+                "cpf" => $dados["cpf"],
+                "cnpj" => $dados["cnpj"],
+            ]);
+
+            return $this->success("Cadastro realizado com sucesso", $user);
         } catch (Exception $e) {
             return $this->error($e->getMessage(), 400);
         }
