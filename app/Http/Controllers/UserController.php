@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreUserRequest;
 use App\Models\User;
 use App\Traits\ApiResponser;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
@@ -43,24 +44,23 @@ class UserController extends Controller
         if (!$testCpf["status"]) {
             return $this->error($testCpf["message"], 400);
         }
+        try {
+            if (!User::with('email', $dados["email"])->exists()) {
 
-        // $testCnpj = User::isCnpjValid($dados["cnpj"]);
+                $user =  User::create([
+                    "name" => $dados["name"],
+                    "email" => $dados["email"],
+                    "password" => $dados["password"],
+                    "cpf" => $dados["cpf"],
+                    "cnpj" => $dados["cnpj"],
+                ]);
 
-        // if (!$testCnpj["status"]) {
-        //     return $this->error($testCnpj["message"], 400);
-        // }
-
-
-
-        $user =  User::create([
-            "name" => $dados["name"],
-            "email" => $dados["email"],
-            "password" => $dados["password"],
-            "cpf" => $dados["cpf"],
-            "cnpj" => $dados["cnpj"],
-        ]);
-
-        return $this->success("Cadastro realizado com sucesso", $user);
+                return $this->success("Cadastro realizado com sucesso", $user);
+            }
+            return  $this->error("O Email enviado já está cadastrado", 400, $dados["email"]);
+        } catch (Exception $e) {
+            return $this->error($e->getMessage(), 400);
+        }
     }
 
 
