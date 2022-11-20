@@ -38,7 +38,7 @@ você só precisa a prender como clonar nesse momento.
 > url(https://youtu.be/nAHVEzDBVeo?t=120)
 
 # Colocando a API para funcionar
-Ao instar o XAMPP, vc pode abrílo em seu computador, pesquisando por ele no menu iniciar. Ative as opções Apache e MSQL, como mostrado
+Ao instar o XAMPP, vc pode abrí-lo em seu computador, pesquisando por ele no menu iniciar. Ative as opções Apache e MSQL, como mostrado
 na imagem abaixo:
 ![Screenshot](imagesReadme/startXampp.png)
 
